@@ -125,3 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "user.User"
+
+# 配置ckedit
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
