@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 sqlparse = "*"
-django = "==2.1.8"
+django = "==2.1.11"
 
 [requires]
 python_version = "3.7"
