@@ -14,10 +14,11 @@ class Singup(View):
 
     def get(self, request):
 
-        return HttpResponse("1")
+        return render(request, 'signup.html')
 
     def post(self, request):
 
         pass
+
 
 
