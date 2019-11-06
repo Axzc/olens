@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>news</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html"></a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">新闻</a></li>
+            <li><a href="#">体育</a></li>
+            <li><a href="#">娱乐</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="login.html">登录</a></li>
+            <li><a href="signup.html">注册</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container container-small">
+    <h1>登录
+        <small>没有账号？<a href="signup.html">注册</a></small>
+    </h1>
+    <form>
+        <div class="form-group">
+            <label>用户名/邮箱</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            <input type="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">登录</button>
+        </div>
+    </form>
+
+</div>
+
+<div class="footer">
+    <p>© 2019 拴蛋头条 中国互联网举报中心京ICP证1401号京ICP备125439号-3京公网安备</p>
+</div>
+
+</body>
+</html>
