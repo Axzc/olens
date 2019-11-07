@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>密云头条</title>
+    <title>Olens</title>
     <link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
 </head>
@@ -32,30 +32,56 @@
     <h1>注册
         <small>已有账号？<a href="login.html">登录</a></small>
     </h1>
-    <form>
-        <div class="form-group">
-            <label>用户名</label>
-            <input type="text" class="form-control">
+
+    <!--<form action="{% url 'signup' %}" method="POST">-->
+        <!--{% csrf_token %}-->
+        <!--{{ form.as_p }}-->
+        <!--&lt;!&ndash;{{ form }}&ndash;&gt;-->
+        <!--&lt;!&ndash;<input type="submit" value="Submit">&ndash;&gt;-->
+
+        <!--<div class="form-group">-->
+            <!--<input class="btn btn-primary btn-block" type="submit">-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--注册Olens即代表您同意<a href="#">Olens服务条款</a>-->
+        <!--</div>-->
+        <!--{{ form.password.errors }}-->
+
+    <!--</form>-->
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <div class="form-group">.
+            {{ form.name.errors }}
+            <label for="{{ form.name.id_for_label }}">用户名</label>
+            {{ form.name }}
         </div>
         <div class="form-group">
-            <label>密码</label>
-            <input type="password" class="form-control">
+            {{ form.password.errors }}
+            <label for="{{ form.password.id_for_label }}">密码</label>
+            {{ form.password }}
         </div>
         <div class="form-group">
-            <label>确认密码</label>
-            <input type="password" class="form-control">
+            {{ form.password_confum.errors }}
+            <label for="{{ form.password_confum.id_for_label }}">确认密码</label>
+            {{ form.password_confum }}
         </div>
         <div class="form-group">
-            <label>邮箱</label>
-            <input type="text" class="form-control">
+            {{ form.email.errors }}
+            <label for="{{ form.eamil.id_for_label }}">邮箱</label>
+            {{ form.email }}
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">注册</button>
         </div>
         <div class="form-group">
-            注册拴蛋头条即代表您同意<a href="#">拴蛋头条服务条款</a>
+            注册Olens即代表您同意<a href="#">Olens服务条款</a>
         </div>
+        <span style="color: red">
+            {{ form.non_field_errors  }}
+        </span>
     </form>
+
 
 </div>
 
