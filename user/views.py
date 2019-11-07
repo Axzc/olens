@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import View
+from .forms import RegisterForm
 
 # Create your views here.
 
@@ -14,11 +15,22 @@ class Singup(View):
 
     def get(self, request):
 
-        return render(request, 'signup.html')
+        form = RegisterForm()
+
+        return render(request, 'signup.html', {'form':form})
 
     def post(self, request):
 
-        pass
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            print(form.cleaned_data.get('name'))
+            print(form.cleaned_data.get('password'))
+
+            return HttpResponse('nice')
+        else:
+            return render(request, 'signup.html', {'form':form})
+
 
 
 
