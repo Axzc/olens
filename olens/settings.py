@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'user',
-    'article',
+    'user.apps.UserConfig',
+    'article.apps.ArticleConfig',
 ]
 
 MIDDLEWARE = [
@@ -131,4 +131,13 @@ AUTH_USER_MODEL = "user.User"
 
 # 配置ckedit
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+# email setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = '1016933825@qq.com'
+EMAIL_HOST_PASSWORD = 'prtemxyufskzbefj'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
