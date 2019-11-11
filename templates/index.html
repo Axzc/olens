@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OLENS</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+	<div class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html"></a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class=active><a href="index.html">首页</a></li>
+				<li><a href="#">新闻</a></li>
+				<li><a href="#">体育</a></li>
+				<li><a href="#">娱乐</a></li>
+			</ul>
+			<div class="usercenter">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="homepage.html">用户中心</a></li>
+			</ul>
+		    </div>
+            <div class="register">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="login.html">登录</a></li>
+				<li><a href="{% url 'signup' %}">注册</a></li>
+			</ul>
+			</div>
+	    </div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="list-group side-bar">
+					<a href="#" class="list-group-item active">综合</a>
+					<a href="#" class="list-group-item">电影</a>
+					<a href="#" class="list-group-item">电视剧</a>
+					<a href="#" class="list-group-item">sony</a>
+					<a href="#" class="list-group-item">apple</a>
+					<a href="#" class="list-group-item">lenvon</a>
+				</div>
+			</div>
+			<div class="col-sm-7">
+				<div class="new-list">
+					<div class="new-list-item clearfix">
+						<div class="col-xs-5">
+						<img src="image/002.jpg">
+						</div>
+						<div class="cor-xs-7">
+							<a href="detail.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
+						
+						    <div class="info">
+								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
+								<span>50k评论</span>·
+								<span>10分钟前</span>
+						    </div>
+						</div>
+					</div>
+					<div class="new-list-item clearfix">
+						<div class="col-xs-5">
+						<img src="image/003.jpg">
+						</div>
+						<div class="cor-xs-7">
+							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
+						
+						    <div class="info">
+								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
+								<span>50k评论</span>·
+								<span>10分钟前</span>
+						    </div>
+						</div>
+					</div>
+					<div class="new-list-item clearfix">
+						<div class="col-xs-5">
+						<img src="image/004.jpg">
+						</div>
+						<div class="cor-xs-7">
+							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
+						
+						    <div class="info">
+								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
+								<span>50k评论</span>·
+								<span>10分钟前</span>
+						    </div>
+						</div>
+					</div>
+					<div class="new-list-item clearfix">
+						<div class="col-xs-5">
+						<img src="image/005.jpg">
+						</div>
+						<div class="cor-xs-7">
+							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
+						
+						    <div class="info">
+								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
+								<span>50k评论</span>·
+								<span>10分钟前</span>
+						    </div>
+						</div>
+					</div>
+					<div class="new-list-item clearfix">
+						<div class="col-xs-5">
+						<img src="image/002.jpg">
+						</div>
+						<div class="cor-xs-7">
+							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
+						
+						    <div class="info">
+								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
+								<span>50k评论</span>·
+								<span>10分钟前</span>
+						    </div>
+						</div>
+					</div>
+					<div class="new-list-item clearfix">
+						<div class="col-xs-5">
+						<img src="image/002.jpg">
+						</div>
+						<div class="cor-xs-7">
+							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
+						
+						    <div class="info">
+								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
+								<span>50k评论</span>·
+								<span>10分钟前</span>
+						    </div>
+						</div>
+					</div>
+					<div class="new-list-item clearfix">
+						<div class="col-xs-5">
+						<img src="image/003.jpg">
+						</div>
+						<div class="cor-xs-7">
+							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
+						
+						    <div class="info">
+								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
+								<span>50k评论</span>·
+								<span>10分钟前</span>
+						    </div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="search-bar">
+					<input type="search" class="form-control" placeholder="搜索">
+				</div>
+				<div class="side-bar-card flag clearfix">
+					<div class="col-xs-5">
+						<img src="image/1-1.png" alt="举报">
+					</div>
+					<div class="col-xs-7">
+						<div class="text-lg">有害信息举报专区</div>
+						<div>举报电话12377</div>
+					</div>
+				</div>
+				<div class="side-bar-card">
+					<div class="card-title">今日最新</div>
+					<div class="card-body">
+						<div class="list">
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
+								<div class="desc">15k阅读 1k评论</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+		    </div>
+    </div>
+</div>
+
+
+<div class="footer">
+	<p>© 2019 拴蛋头条 中国互联网举报中心京ICP证1401号京ICP备125439号-3京公网安备</p>
+</div>
+
+</body>
+</html>
