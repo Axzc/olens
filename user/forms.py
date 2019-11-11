@@ -78,14 +78,18 @@ class LoginForm(forms.Form):
     def clean(self):
 
         cleaned_data = self.cleaned_data
-        usernmae = self.cleaned_data['usernmae']
+        username = self.cleaned_data['usernmae']
         pwd = self.cleaned_data['password']
+        print(username, pwd)
 
-        user = authenticate(username=usernmae, password=pwd)
+        user = authenticate(username=username, password=pwd)
+        print(user)
         if not user:
             raise forms.ValidationError('用户名或密码错误')
         if not user.is_active:
             raise forms.ValidationError('用户未激活')
+
+        return cleaned_data
 
 
 

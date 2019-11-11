@@ -43,12 +43,8 @@ class Singup(View):
             tjwss = TJWSS(settings.SECRET_KEY, 900)
             info = {'confirm': user.id}
             token = tjwss.dumps(info).decode()
-
-
             # 发送邮件
             send_signup_active_mail.delay(email, username, token)
-
-
             return redirect(reverse('index'))
             # return HttpResponse('nice')
         else:
@@ -58,7 +54,8 @@ class Singup(View):
 class Login(View):
 
     def get(self, request):
-        return render(request, 'login.html')
+        form = LoginForm()
+        return render(request, 'login.html', {'form':form})
 
     def post(self, request):
 
@@ -67,6 +64,9 @@ class Login(View):
         if form.is_valid:
 
             login(form.cleaned_data['usernmae'], form.cleaned_data['password'])
+            print(form.cleaned_data['usernmae'], form.cleaned_data['password'])
+
+
 
             return render(request, 'index.html')
         else:
