@@ -22,16 +22,16 @@
 				<li><a href="#">娱乐</a></li>
 			</ul>
 			<div class="usercenter">
-			<!--<ul class="nav navbar-nav navbar-right">-->
-				<!--<li><a href="homepage.html">用户中心</a></li>-->
-				<!--<li><a href="homepage.html">退出登录</a></li>-->
-			<!--</ul>-->
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="{% url 'usercenter' %}"> {{ username }}</a></li>
+				<li><a href="{% url 'logout' %}">退出登录</a></li>
+			</ul>
 		    </div>
             <div class="register">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{% url 'login' %}">登录</a></li>
-				<li><a href="{% url 'signup' %}">注册</a></li>
-			</ul>
+			<!--<ul class="nav navbar-nav navbar-right">-->
+				<!--<li><a href="login.html">登录</a></li>-->
+				<!--<li><a href="{% url 'signup' %}">注册</a></li>-->
+			<!--</ul>-->
 			</div>
 	    </div>
 	</div>
@@ -49,31 +49,27 @@
 			</div>
 			<div class="col-sm-7">
 				<div class="new-list">
-
-					{% for post in post_list %}
 					<div class="new-list-item clearfix">
 						<div class="col-xs-5">
 						<img src="image/002.jpg">
 						</div>
 						<div class="cor-xs-7">
-							<a href="detail.html" class="title">{{ post.title }}</a>
-
+							<a href="detail.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
+						
 						    <div class="info">
 								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
 								<span>50k评论</span>·
-								<span>{{ post.created }}发布</span>
+								<span>10分钟前</span>
 						    </div>
 						</div>
 					</div>
-					{% endfor %}
-
 					<div class="new-list-item clearfix">
 						<div class="col-xs-5">
 						<img src="image/003.jpg">
 						</div>
 						<div class="cor-xs-7">
 							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
-
+						
 						    <div class="info">
 								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
 								<span>50k评论</span>·
@@ -87,7 +83,7 @@
 						</div>
 						<div class="cor-xs-7">
 							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
-
+						
 						    <div class="info">
 								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
 								<span>50k评论</span>·
@@ -101,7 +97,7 @@
 						</div>
 						<div class="cor-xs-7">
 							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
-
+						
 						    <div class="info">
 								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
 								<span>50k评论</span>·
@@ -115,7 +111,7 @@
 						</div>
 						<div class="cor-xs-7">
 							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
-
+						
 						    <div class="info">
 								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
 								<span>50k评论</span>·
@@ -129,7 +125,7 @@
 						</div>
 						<div class="cor-xs-7">
 							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
-
+						
 						    <div class="info">
 								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
 								<span>50k评论</span>·
@@ -143,7 +139,7 @@
 						</div>
 						<div class="cor-xs-7">
 							<a href="new.html" class="title">2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉2年前他为教育事业和高圆圆分手，今成这般，高圆圆：我有一句MMP如鲠在喉</a>
-
+						
 						    <div class="info">
 								<span><span class="avatar"><img src="image/logo.jpg"></span>tobi</span>·
 								<span>50k评论</span>·
@@ -171,12 +167,10 @@
 					<div class="card-title">今日最新</div>
 					<div class="card-body">
 						<div class="list">
-							{% for post in post_list %}
-							    <div class="item">
-								<a href="#" class="title">{{ post.title }}</a>
+							<div class="item">
+								<a href="#" class="title">A document is a written, drawn, presented</a>
 								<div class="desc">15k阅读 1k评论</div>
 							</div>
-							{% endfor %}
 							<div class="item">
 								<a href="#" class="title">A document is a written, drawn, presented</a>
 								<div class="desc">15k阅读 1k评论</div>

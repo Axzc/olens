@@ -1,7 +1,9 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, HttpResponse, reverse, redirect
 from itsdangerous import TimedJSONWebSignatureSerializer as TJWSS, SignatureExpired
-from django.views.generic import View
+from django.views.generic import View, ListView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from olens import settings
 from .forms import RegisterForm, LoginForm
 from .models import User
@@ -17,6 +19,7 @@ from celery_task.tasks import send_signup_active_mail
 
 
 class Singup(View):
+    '''注册'''
 
     def get(self, request):
 
@@ -35,7 +38,7 @@ class Singup(View):
             user = User.objects.create_user(username=username,
                                             password=password,
                                             email=email)
-            user.is_active = 0
+            user.is_active = 0  # 设置激活状态
             user.save()
             print(username, password, email)
 
@@ -52,29 +55,40 @@ class Singup(View):
 
 
 class Login(View):
+    '''登录'''
 
     def get(self, request):
         form = LoginForm()
-        return render(request, 'login.html', {'form':form})
+        return render(request, 'login.html', {'form': form})
 
     def post(self, request):
 
         form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)  # 登录
 
-        if form.is_valid:
-
-            login(form.cleaned_data['usernmae'], form.cleaned_data['password'])
-            print(form.cleaned_data['usernmae'], form.cleaned_data['password'])
-
-
-
-            return render(request, 'index.html')
+            return redirect(reverse('home'))
         else:
-            return render(request, 'login.html', {'form':form})
+            return render(request, 'login.html', {'form': form})
+
+
+# https://www.jianshu.com/p/af04705b5245
+# @login_required() 注意 这里不能直接装饰
+@method_decorator(login_required, name='dispatch')
+class UserCenter(ListView):
+
+    model = User
+    # templates_name = 'homepage.html'
+    template_name = 'homepage.html'
+    context_object_name = 'users'
 
 
 
 def active(request, token):
+    ''' 激活 '''
 
     if request.method == 'GET':
         tjwss = TJWSS(settings.SECRET_KEY, 900)
@@ -94,6 +108,17 @@ def active(request, token):
             # 激活链接过期
 
             return HttpResponse('链接已过期')
+
+def signout(request):
+
+    if request.method == 'GET':
+
+        logout(request)  # 退出登录  清除session
+
+        # 跳转到首页
+        return redirect(reverse('index'))
+
+
 
 
 

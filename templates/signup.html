@@ -32,26 +32,9 @@
     <h1>注册
         <small>已有账号？<a href="login.html">登录</a></small>
     </h1>
-
-    <!--<form action="{% url 'signup' %}" method="POST">-->
-        <!--{% csrf_token %}-->
-        <!--{{ form.as_p }}-->
-        <!--&lt;!&ndash;{{ form }}&ndash;&gt;-->
-        <!--&lt;!&ndash;<input type="submit" value="Submit">&ndash;&gt;-->
-
-        <!--<div class="form-group">-->
-            <!--<input class="btn btn-primary btn-block" type="submit">-->
-        <!--</div>-->
-
-        <!--<div class="form-group">-->
-            <!--注册Olens即代表您同意<a href="#">Olens服务条款</a>-->
-        <!--</div>-->
-        <!--{{ form.password.errors }}-->
-
-    <!--</form>-->
     <form method="post" action="{% url 'signup' %}">
         {% csrf_token %}
-        <div class="form-group">.
+        <div class="form-group">
             {{ form.name.errors }}
             <label for="{{ form.name.id_for_label }}">用户名</label>
             {{ form.name }}
@@ -86,9 +69,7 @@
 </div>
 
 <div class="footer">
-    <p>© 2019 拴蛋头条 中国互联网举报中心京ICP证1401号京ICP备125439号-3京公网安备</p>
+    <p>© 2019  中国互联网举报中心京ICP证1401号京ICP备125439号-3京公网安备</p>
 </div>
-
-
 </body>
 </html>

@@ -18,12 +18,12 @@ img,
     color: #337ab7;
 }
 
-/*.usercenter{
+.usercenter{
 	display: none;
 }
 .register{
 	display: none;
-}*/
+}
 
 .navbar-brand{
     background-image: url(../image/logo.png);

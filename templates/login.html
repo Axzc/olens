@@ -14,7 +14,7 @@
 <div class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.html"></a>
+            <a class="navbar-brand" href="{% url 'index' %}"></a>
         </div>
         <ul class="nav navbar-nav">
             <li><a href="#">首页</a></li>
@@ -30,9 +30,9 @@
 </div>
 <div class="container container-small">
     <h1>登录
-        <small>没有账号？<a href="signup.html">注册</a></small>
+        <small>没有账号？<a href="{% url 'signup' %}">注册</a></small>
     </h1>
-    <form method="post" action="{% url 'index' %}">
+    <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="form-group">
             {{ form.username.error }}
