@@ -1,8 +1,6 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from article import views
 from article.views import IndexView
-import user.urls
 
 urlpatterns = [
   path('', IndexView.as_view(), name='index'),

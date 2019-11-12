@@ -43,53 +43,58 @@
 		    <div class="row">
 				<div class="col-sm-3">
 					<div class="list-group side-bar">
-						<a href="#" class="list-group-item active">个人资料</a>
+						<a href="#" class="list-group-item active">个人信息</a>
+					</div>
+					<div class="list-group side-bar">
+						<a href="#" class="list-group-item active">修改密码</a>
 					</div>
 				</div>
 				<div class="col-sm-9">
-					<div class="info-list clearfix">
-						<div class="col-xs-4">
-							<div class="side-bar-card flag clearfix">
-								<div class="col-xs-3">
-									<img src="image/007.png" alt="等级">
-								</div>
-								<div class="col-xs-9">
-									<div class="text-lg">Lv.19</div>
-									<div>经验值1330</div>
-								</div>
-						    </div>
-						</div>
-						<div class="col-xs-4">
-							<div class="side-bar-card flag clearfix">
-								<div class="col-xs-3">
-									<img src="image/006.png" alt="金币">
-								</div>
-								<div class="col-xs-9">
-									<div class="text-lg">我的金币</div>
-									<div>1050金币</div>
-								</div>
-						    </div>
-						</div>
-						<div class="col-xs-4">
-							<div class="side-bar-card flag clearfix">
-								<div class="col-xs-3">
-									<img src="image/008.png" alt="成就">
-								</div>
-								<div class="col-xs-9">
-									<div class="text-lg">我的成就</div>
-									<div>暂无成就</div>
-								</div>
-						    </div>
-						</div>
-						</div>
+					<!--<div class="info-list clearfix">-->
+						<!--<div class="col-xs-4">-->
+							<!--<div class="side-bar-card flag clearfix">-->
+								<!--<div class="col-xs-3">-->
+									<!--<img src="image/007.png" alt="等级">-->
+								<!--</div>-->
+								<!--<div class="col-xs-9">-->
+									<!--<div class="text-lg">Lv.19</div>-->
+									<!--<div>经验值1330</div>-->
+								<!--</div>-->
+						    <!--</div>-->
+						<!--</div>-->
+						<!--<div class="col-xs-4">-->
+							<!--<div class="side-bar-card flag clearfix">-->
+								<!--<div class="col-xs-3">-->
+									<!--<img src="image/006.png" alt="金币">-->
+								<!--</div>-->
+								<!--<div class="col-xs-9">-->
+									<!--<div class="text-lg">我的金币</div>-->
+									<!--<div>1050金币</div>-->
+								<!--</div>-->
+						    <!--</div>-->
+						<!--</div>-->
+						<!--<div class="col-xs-4">-->
+							<!--<div class="side-bar-card flag clearfix">-->
+								<!--<div class="col-xs-3">-->
+									<!--<img src="image/008.png" alt="成就">-->
+								<!--</div>-->
+								<!--<div class="col-xs-9">-->
+									<!--<div class="text-lg">我的成就</div>-->
+									<!--<div>暂无成就</div>-->
+								<!--</div>-->
+						    <!--</div>-->
+						<!--</div>-->
+						<!--</div>-->
 						<div class="panel panel-default">
 							<div class="panel-heading">
-					    		<div class="panel-title">个人资料</div>
+					    		<div class="panel-title">个人信息</div>
 					    	</div>
 					    	<div class="panel-body">
 								<div class="user_info_list">
 									<p><span>用户名:</span>{{ user.username }}</p>
 		                            <p><span>邮  箱:</span>{{ user.email }}</p>
+									 <p><span>我的经验:</span>{{ user.user_exp }}</p>
+									 <p><span>我的等级:</span>{{ user.user_grade  }}</p>
 		                            <p><span>注册时间:</span>{{ user.created }}</p>
 							    </div>
 						    </div>
