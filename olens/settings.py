@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 
-AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "user.User"  # 使用django的 auth
 
 # 配置ckedit
 CKEDITOR_UPLOAD_PATH = 'uploads/'
@@ -141,4 +141,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '1016933825@qq.com'
 EMAIL_HOST_PASSWORD = 'prtemxyufskzbefj'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGIN_URL = '/user/login'  # 设置login_required 重定向地址
 
