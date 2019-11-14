@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>密云头条</title>
+	<title>olens</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
@@ -21,22 +21,25 @@
 				<li><a href="#">体育</a></li>
 				<li><a href="#">娱乐</a></li>
 			</ul>
-
-			<div class="usercenter">
-				<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right">
 					<li class=active><a href="homepage.html">用户中心</a></li>
 					<li><a href="{% url 'logout' %}">退出登录</a></li>
-
 				</ul>
-		    </div>
-            <div class="register">
-				<ul class="nav navbar-nav navbar-right">
-					<!--<li><a href="login.html">登录</a></li>-->
-					<!--<li><a href="signup.html">注册</a></li>-->
+
+			<!--<div class="usercenter">-->
+				<!--<ul class="nav navbar-nav navbar-right">-->
+					<!--<li class=active><a href="homepage.html">用户中心</a></li>-->
 					<!--<li><a href="{% url 'logout' %}">退出登录</a></li>-->
+				<!--</ul>-->
+		    <!--</div>-->
+            <!--<div class="register">-->
+				<!--<ul class="nav navbar-nav navbar-right">-->
+					<!--&lt;!&ndash;<li><a href="login.html">登录</a></li>&ndash;&gt;-->
+					<!--&lt;!&ndash;<li><a href="signup.html">注册</a></li>&ndash;&gt;-->
+					<!--&lt;!&ndash;<li><a href="{% url 'logout' %}">退出登录</a></li>&ndash;&gt;-->
 
-				</ul>
-			</div>
+				<!--</ul>-->
+			<!--</div>-->
 	    </div>
 	</div>
 		<div class="container">
@@ -46,7 +49,7 @@
 						<a href="#" class="list-group-item active">个人信息</a>
 					</div>
 					<div class="list-group side-bar">
-						<a href="#" class="list-group-item active">修改密码</a>
+						<a href="{% url 'changepassword' %}" class="list-group-item active">修改密码</a>
 					</div>
 				</div>
 				<div class="col-sm-9">

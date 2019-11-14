@@ -2,7 +2,9 @@ from django import forms
 from django.forms import widgets
 from .models import User
 
+
 from django.contrib.auth import authenticate
+from django.contrib.auth.forms import SetPasswordForm
 
 class RegisterForm(forms.Form):
 
@@ -12,7 +14,8 @@ class RegisterForm(forms.Form):
         required = True,
         error_messages = {'required':'用户名不能为空', 'invalid':'格式不对'},
         # widget = widgets.TextInput()
-        widget = widgets.TextInput(attrs={'class':'form-control loon luser', 'placeholder':'用户名'})
+        widget = widgets.TextInput(attrs={'class':'form-control loon luser',
+                                          'placeholder':'用户名'})
         # widget = widgets.TextInput(attrs={'class': 'form-control loon luser', 'value': '用户名'})
     )
 
@@ -21,7 +24,8 @@ class RegisterForm(forms.Form):
         max_length = 32,
         min_length = 6,
         error_messages = {'required': '密码不能为空', 'invalid':'密码格式不对'},
-        widget = widgets.PasswordInput(attrs={'class':'form-control loon lpass', 'placeholder': '输入密码'})
+        widget = widgets.PasswordInput(attrs={'class':'form-control loon lpass',
+                                              'placeholder': '密码在六位以上'})
     )
 
     password_confum = forms.CharField(
@@ -29,11 +33,13 @@ class RegisterForm(forms.Form):
         max_length = 32,
         min_length = 6,
         error_messages = {'required': '密码不能为空', 'invalid':'密码格式不对'},
-        widget = widgets.PasswordInput(attrs={'class':'form-control loon lpass', 'placeholder': '输入再次密码'})
+        widget = widgets.PasswordInput(attrs={'class':'form-control loon lpass',
+                                              'placeholder': '输入再次密码'})
     )
 
     email = forms.EmailField(
-        widget = widgets.EmailInput(attrs={'class':'form-control loon lpass', 'placeholder':'邮箱'})
+        widget = widgets.EmailInput(attrs={'class':'form-control loon lpass',
+                                           'placeholder':'邮箱'})
     )
 
     def clean(self):
@@ -67,13 +73,15 @@ class LoginForm(forms.Form):
                            min_length=4,
                            required = True,
                            error_messages = {'required':'用户名不能为空', 'invalid':'格式不对'},
-                           widget = widgets.TextInput(attrs={'class':'form-control loon luser', 'placeholder':'用户名'}))
+                           widget = widgets.TextInput(attrs={'class':'form-control loon luser',
+                                                             'placeholder':'用户名'}))
 
     password = forms.CharField(max_length=32,
                                min_length=6,
                                required=True,
                                error_messages = {'required':'密码不能为空', 'invalid':'格式不对'},
-                               widget = widgets.PasswordInput(attrs={'class':'form-control loon lpass', 'placeholder': '输入密码'}))
+                               widget = widgets.PasswordInput(attrs={'class':'form-control loon lpass',
+                                                                     'placeholder': '密码在六位以上'}))
 
     def clean(self):
 
@@ -92,6 +100,62 @@ class LoginForm(forms.Form):
         return cleaned_data
 
 
+class PasswordChangeForm(SetPasswordForm):
+
+    error_messages = {
+        'password_mismatch': '俩次密码输入的不一致',
+        'password_incorrect': '原名密码输入的不正确'
+    }
+
+    original_password = forms.CharField(max_length=32,
+                                        min_length=6,
+                                        required=True,
+                                        error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
+                                        widget=widgets.PasswordInput(attrs={'class':'form-control loon lpass',
+                                                                            'placeholder':'密码在六位以上'}))
+
+    new_password1 = forms.CharField(max_length=32,
+                                        min_length=6,
+                                        required=True,
+                                        error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
+                                        widget=widgets.PasswordInput(attrs={'class': 'form-control loon lpass',
+                                                                            'placeholder': '新密码在六位以上'}))
+
+    new_password2 = forms.CharField(max_length=32,
+                                        min_length=6,
+                                        required=True,
+                                        error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
+                                        widget=widgets.PasswordInput(attrs={'class':'form-control loon lpass',
+                                                                            'placeholder':'确认新密码'}))
+
+
+    # def clean_new_password_confum(self):
+    #     new_pwd = self.cleaned_data['new_password']
+    #     new_pwd_cfm = self.cleaned_data['new_password_confum']
+    #
+    #     if new_pwd != new_pwd_cfm:
+    #         raise forms.ValidationError('两次密码输入的不一样')
+    #
+    #     return new_pwd_cfm
+
+    def clean_original_password(self):
+        original_pwd = self.cleaned_data['original_password']
+        if not self.user.check_password(original_pwd):
+            raise forms.ValidationError(self.error_messages['password_incorrect'])
+
+        return original_pwd
+
+    # def clean(self):
+    #     cleaned_data = self.cleaned_data
+    #     username = self.request.user.username
+    #     original_pwd = self.cleaned_data['original_password']
+    #     new_password_confum = self.cleaned_data['new_password_confum']
+    #
+    #     if original_pwd != new_password_confum:
+    #         raise forms.ValidationError('两次密码输入不一样')
+    #
+    #
+    #     return cleaned_data
 
 
 

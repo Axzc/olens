@@ -5,7 +5,7 @@ from django.views.generic import View, ListView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from olens import settings
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, PasswordChangeForm
 from .models import User
 from celery_task.tasks import send_signup_active_mail
 
@@ -81,10 +81,38 @@ class Login(View):
 class UserCenter(ListView):
 
     model = User
-    # templates_name = 'homepage.html'
     template_name = 'homepage.html'
     context_object_name = 'users'
 
+#
+# @method_decorator(login_required, name='dispatch')
+# class ChangePassword(View):
+#
+#     def get(self, request):
+#
+#         form = PasswordChangeForm(request)
+#         return render(request, 'password_change.html', {'form':form})
+#
+#     def post(self, request):
+#
+#         form = PasswordChangeForm(request.POST)
+#         if form.is_valid():
+#             # username = request.user.username
+#             # original_password = form.cleaned_data.get('original_password')
+#             # user = authenticate(username=username, password=original_password)
+#             # if user
+#             return redirect(reverse('login'))
+#         else:
+#             return render(request, 'password_change.html', {'form':form})
+#
+# #
+# # class PasswordChangeView():
+# #
+# #     template_name = 'password_change.html'
+# #     success_url = '/user/login'
+# #     form_class = ChangePasswordForm
+#
+#
 
 
 def active(request, token):
@@ -109,6 +137,7 @@ def active(request, token):
 
             return HttpResponse('链接已过期')
 
+@login_required
 def signout(request):
 
     if request.method == 'GET':
@@ -117,6 +146,8 @@ def signout(request):
 
         # 跳转到首页
         return redirect(reverse('index'))
+
+
 
 
 
