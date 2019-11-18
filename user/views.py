@@ -5,7 +5,7 @@ from django.views.generic import View, ListView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from olens import settings
-from .forms import RegisterForm, LoginForm, PasswordChangeForm
+from .forms import RegisterForm, LoginForm, MyPasswordChangeForm
 from .models import User
 from celery_task.tasks import send_signup_active_mail
 
@@ -49,7 +49,6 @@ class Singup(View):
             # 发送邮件
             send_signup_active_mail.delay(email, username, token)
             return redirect(reverse('index'))
-            # return HttpResponse('nice')
         else:
             return render(request, 'signup.html', {'form':form})
 
@@ -72,6 +71,7 @@ class Login(View):
 
             return redirect(reverse('home'))
         else:
+            print(form.non_field_errors)
             return render(request, 'login.html', {'form': form})
 
 
@@ -114,6 +114,31 @@ class UserCenter(ListView):
 #
 #
 
+def change_password(request):
+
+    if request.method == 'GET':
+
+        form = MyPasswordChangeForm(request.user)
+        return render(request, 'password_change.html', {'form':form})
+
+    if request.method == 'POST':
+
+        form = MyPasswordChangeForm(request.user, request.POST)
+        print()
+        print(form.is_valid())
+
+        if form.is_valid():
+            print("run!~~~~~~~~~~~~~~~~~~~~~")
+            # form.save()  # 修改密码
+            return redirect(reverse('pwdcd'))
+        else:
+            print(form.non_field_errors,  "VIEWS")
+            return render(request, 'password_change.html', {'form': form})
+
+
+
+
+
 
 def active(request, token):
     ''' 激活 '''
@@ -146,6 +171,12 @@ def signout(request):
 
         # 跳转到首页
         return redirect(reverse('index'))
+
+
+def password_change1(request):
+
+    raw_pwd = request.get('raw-pwd')
+    print(raw_pwd)
 
 
 

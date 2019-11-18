@@ -100,7 +100,11 @@ class LoginForm(forms.Form):
         return cleaned_data
 
 
-class PasswordChangeForm(SetPasswordForm):
+class MyPasswordChangeForm(forms.Form):
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
 
     error_messages = {
         'password_mismatch': '俩次密码输入的不一致',
@@ -112,6 +116,7 @@ class PasswordChangeForm(SetPasswordForm):
                                         required=True,
                                         error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
                                         widget=widgets.PasswordInput(attrs={'class':'form-control loon lpass',
+                                                                            'id':'raw-pwd',
                                                                             'placeholder':'密码在六位以上'}))
 
     new_password1 = forms.CharField(max_length=32,
@@ -119,6 +124,7 @@ class PasswordChangeForm(SetPasswordForm):
                                         required=True,
                                         error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
                                         widget=widgets.PasswordInput(attrs={'class': 'form-control loon lpass',
+                                                                            'id':'new-pwd1',
                                                                             'placeholder': '新密码在六位以上'}))
 
     new_password2 = forms.CharField(max_length=32,
@@ -126,22 +132,28 @@ class PasswordChangeForm(SetPasswordForm):
                                         required=True,
                                         error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
                                         widget=widgets.PasswordInput(attrs={'class':'form-control loon lpass',
+                                                                            'id':'new-pwd2',
                                                                             'placeholder':'确认新密码'}))
 
+    def clean_new_password2(self):
+        new_password1 = self.cleaned_data['new_password1']
+        new_password2 = self.cleaned_data['new_password2']
+        print('1 error')
 
-    # def clean_new_password_confum(self):
-    #     new_pwd = self.cleaned_data['new_password']
-    #     new_pwd_cfm = self.cleaned_data['new_password_confum']
-    #
-    #     if new_pwd != new_pwd_cfm:
-    #         raise forms.ValidationError('两次密码输入的不一样')
-    #
-    #     return new_pwd_cfm
+
+        if new_password1 != new_password2:
+            raise forms.ValidationError('两次密码输入的不一样')
+
+        return new_password2
 
     def clean_original_password(self):
         original_pwd = self.cleaned_data['original_password']
+        print('2 error')
+
         if not self.user.check_password(original_pwd):
-            raise forms.ValidationError(self.error_messages['password_incorrect'])
+            print('error if')
+            print(self.error_messages['password_incorrect'])
+            raise forms.ValidationError("原密码输入不正确")
 
         return original_pwd
 
