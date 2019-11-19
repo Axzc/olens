@@ -32,12 +32,22 @@
     <h1>登录
         <small>没有账号？<a href="{% url 'signup' %}">注册</a></small>
     </h1>
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="form-group">
             {{ form.username.error }}
             <label for="form.username.id_for_label">用户名/邮箱</label>
             {{ form.username }}
+
             <!--<input type="text" class="form-control">-->
         </div>
         <div class="form-group">
@@ -49,6 +59,7 @@
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">登录</button>
         </div>
+
         <span style="color: red">
             {{ form.non_field_errors  }}
         </span>

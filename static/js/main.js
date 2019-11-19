@@ -1,4 +1,4 @@
-$("change-btn").click(function() {
+$("#change-btn").click(function() {
     $.ajaxSetup({data: {csrfmiddlewaretoken: '{{ csrf_token }}'}});
     $.ajax({
         url:"/user/password-change",

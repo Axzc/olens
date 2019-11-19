@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'article.apps.ArticleConfig',
     'ckeditor',
+    'oauth2_provider',
+    'corsheaders'  # 解决跨域问题
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # 解决跨域问题
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'olens.urls'
@@ -143,4 +147,7 @@ EMAIL_HOST_PASSWORD = 'prtemxyufskzbefj'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGIN_URL = '/user/login'  # 设置login_required 重定向地址
+
+CORS_ORIGIN_ALLOW_ALL = True  # 所有访问都被允许,跨域
+
 

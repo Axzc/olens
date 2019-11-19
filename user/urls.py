@@ -1,9 +1,8 @@
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
-from user.forms import MyPasswordChangeForm
 from user.views import Singup, Login, UserCenter
 from user import views
 
@@ -18,6 +17,7 @@ urlpatterns = [
     path('password-change-done', TemplateView.as_view(
         template_name='password_change_done.html'),
          name='pwdcd'),
+    # path('accounts/', include('django.contrib.auth.urls'))
 ]
 
 # path('repwd', ChangePassword.as_view(), name='changepassword'),

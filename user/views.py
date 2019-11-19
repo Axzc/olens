@@ -5,7 +5,7 @@ from django.views.generic import View, ListView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from olens import settings
-from .forms import RegisterForm, LoginForm, MyPasswordChangeForm
+from .forms import RegisterForm, LoginForm, MyChangePasswordFrom
 from .models import User
 from celery_task.tasks import send_signup_active_mail
 
@@ -14,9 +14,6 @@ from celery_task.tasks import send_signup_active_mail
 # https://segmentfault.com/a/1190000009455783?utm_source=tag-newest
 # https://juejin.im/post/5c9756296fb9a070ad504a05
 # https://code.ziqiangxuetang.com/django/django-generic-views.html
-
-
-
 
 class Singup(View):
     '''注册'''
@@ -63,6 +60,7 @@ class Login(View):
     def post(self, request):
 
         form = LoginForm(request.POST)
+        print(form.is_valid())
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -115,29 +113,26 @@ class UserCenter(ListView):
 #
 
 def change_password(request):
+    '''修改密码'''
 
     if request.method == 'GET':
 
-        form = MyPasswordChangeForm(request.user)
-        return render(request, 'password_change.html', {'form':form})
+        form = MyChangePasswordFrom(user=request.user)
+        return render(request, 'password_change.html', {'form': form})
 
     if request.method == 'POST':
 
-        form = MyPasswordChangeForm(request.user, request.POST)
-        print()
+        form = MyChangePasswordFrom(user=request.user, data=request.POST)
         print(form.is_valid())
+        print(form.is_bound, "2")
 
         if form.is_valid():
             print("run!~~~~~~~~~~~~~~~~~~~~~")
-            # form.save()  # 修改密码
+            form.save()  # 修改密码
             return redirect(reverse('pwdcd'))
         else:
             print(form.non_field_errors,  "VIEWS")
             return render(request, 'password_change.html', {'form': form})
-
-
-
-
 
 
 def active(request, token):
@@ -156,11 +151,11 @@ def active(request, token):
 
             return redirect(reverse('login'))
 
-
         except SignatureExpired as e:
             # 激活链接过期
 
             return HttpResponse('链接已过期')
+
 
 @login_required
 def signout(request):
