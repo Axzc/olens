@@ -1,15 +1,15 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, HttpResponse, reverse, redirect
-from itsdangerous import TimedJSONWebSignatureSerializer as TJWSS, SignatureExpired
 from django.views.generic import View, ListView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from itsdangerous import TimedJSONWebSignatureSerializer as TJWSS, SignatureExpired
+
 from olens import settings
 from .forms import RegisterForm, LoginForm, MyChangePasswordFrom
 from .models import User
 from celery_task.tasks import send_signup_active_mail
 
-# Create your views here.
 
 # https://segmentfault.com/a/1190000009455783?utm_source=tag-newest
 # https://juejin.im/post/5c9756296fb9a070ad504a05
@@ -60,7 +60,6 @@ class Login(View):
     def post(self, request):
 
         form = LoginForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -82,38 +81,10 @@ class UserCenter(ListView):
     template_name = 'homepage.html'
     context_object_name = 'users'
 
-#
-# @method_decorator(login_required, name='dispatch')
-# class ChangePassword(View):
-#
-#     def get(self, request):
-#
-#         form = PasswordChangeForm(request)
-#         return render(request, 'password_change.html', {'form':form})
-#
-#     def post(self, request):
-#
-#         form = PasswordChangeForm(request.POST)
-#         if form.is_valid():
-#             # username = request.user.username
-#             # original_password = form.cleaned_data.get('original_password')
-#             # user = authenticate(username=username, password=original_password)
-#             # if user
-#             return redirect(reverse('login'))
-#         else:
-#             return render(request, 'password_change.html', {'form':form})
-#
-# #
-# # class PasswordChangeView():
-# #
-# #     template_name = 'password_change.html'
-# #     success_url = '/user/login'
-# #     form_class = ChangePasswordForm
-#
-#
 
 def change_password(request):
-    '''修改密码'''
+
+    '''修改密码 '''
 
     if request.method == 'GET':
 
@@ -122,13 +93,17 @@ def change_password(request):
 
     if request.method == 'POST':
 
-        form = MyChangePasswordFrom(user=request.user, data=request.POST)
-        print(form.is_valid())
-        print(form.is_bound, "2")
+        user = request.user
+        form = MyChangePasswordFrom(user=user, data=request.POST)
+        print(form.is_valid(), "mylove")
 
         if form.is_valid():
-            print("run!~~~~~~~~~~~~~~~~~~~~~")
-            form.save()  # 修改密码
+            print("done")
+            # form.save()  # 修改密码
+            password = form.cleaned_data["new_password1"]
+            user.set_password(password)  # 修改密码
+            user.save()  # 提交
+
             return redirect(reverse('pwdcd'))
         else:
             print(form.non_field_errors,  "VIEWS")
@@ -167,11 +142,10 @@ def signout(request):
         # 跳转到首页
         return redirect(reverse('index'))
 
-
-def password_change1(request):
-
-    raw_pwd = request.get('raw-pwd')
-    print(raw_pwd)
+# def password_change1(request):
+#
+#     raw_pwd = request.get('raw-pwd')
+#     print(raw_pwd)
 
 
 
