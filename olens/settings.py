@@ -150,4 +150,6 @@ LOGIN_URL = '/user/login'  # 设置login_required 重定向地址
 
 CORS_ORIGIN_ALLOW_ALL = True  # 所有访问都被允许,跨域
 
+AUTHENTICATION_BACKENDS = ('user.views.CustomBackend', )  # 设置邮箱也能登录
+
 

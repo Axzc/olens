@@ -4,6 +4,9 @@ from django.views.generic import View, ListView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from itsdangerous import TimedJSONWebSignatureSerializer as TJWSS, SignatureExpired
+from django.contrib.auth.backends import ModelBackend
+from django.db.models import Q
+
 
 from olens import settings
 from .forms import RegisterForm, LoginForm, MyChangePasswordFrom
@@ -120,7 +123,7 @@ def active(request, token):
             # 获取解密信息
             info = tjwss.loads(token)
             user_id = info['confirm']
-            user = User.objects.get(id = user_id)
+            user = User.objects.get(id=user_id)
             user.is_active = 1  # 修改激活状态
             user.save()
 
@@ -128,7 +131,8 @@ def active(request, token):
 
         except SignatureExpired as e:
             # 激活链接过期
-
+            user = User.objects.get(id=user_id)
+            user.delete()
             return HttpResponse('链接已过期')
 
 
@@ -146,6 +150,18 @@ def signout(request):
 #
 #     raw_pwd = request.get('raw-pwd')
 #     print(raw_pwd)
+
+
+class CustomBackend(ModelBackend):
+    """邮箱登录"""
+
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        try:
+            user = User.objects.get(Q(username=username) | Q(email=username))
+            if user.check_password(password):
+                return user
+        except Exception as e:
+            return None
 
 
 

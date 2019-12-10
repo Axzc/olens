@@ -11,7 +11,7 @@ class RegisterForm(forms.Form):
         required=True,
         error_messages={'required': '用户名不能为空', 'invalid': '格式不对'},
         widget=widgets.TextInput(attrs={'class': 'form-control loon luser',
-                                          'placeholder': '用户名'})
+                                        'placeholder': '用户名'})
     )
 
     password = forms.CharField(
@@ -20,7 +20,7 @@ class RegisterForm(forms.Form):
         min_length=6,
         error_messages={'required': '密码不能为空', 'invalid':'密码格式不对'},
         widget=widgets.PasswordInput(attrs={'class': 'form-control loon lpass',
-                                              'placeholder': '密码在六位以上'})
+                                            'placeholder': '密码在六位以上'})
     )
 
     password_confum = forms.CharField(
@@ -29,12 +29,12 @@ class RegisterForm(forms.Form):
         min_length=6,
         error_messages={'required': '密码不能为空', 'invalid':'密码格式不对'},
         widget=widgets.PasswordInput(attrs={'class': 'form-control loon lpass',
-                                              'placeholder': '输入再次密码'})
+                                            'placeholder': '输入再次密码'})
     )
 
     email = forms.EmailField(
         widget=widgets.EmailInput(attrs={'class':' form-control loon lpass',
-                                           'placeholder':'邮箱'})
+                                         'placeholder': '邮箱'})
     )
 
     def clean(self):
@@ -44,9 +44,6 @@ class RegisterForm(forms.Form):
         pwd = self.cleaned_data['password']
         re_pwd = self.cleaned_data['password_confum']
         email1 = self.cleaned_data['email']
-
-        print('wai', pwd)
-        print('re_pwd', re_pwd)
 
         if pwd != re_pwd:
             raise forms.ValidationError('两次输入的密码不匹配')
@@ -64,7 +61,7 @@ class RegisterForm(forms.Form):
 
 class LoginForm(forms.Form):
 
-    username = forms.CharField(max_length=12,
+    username = forms.CharField(max_length=30,
                                min_length=4,
                                required=True,
                                error_messages={'required':'用户名不能为空', 'invalid':'格式不对'},
