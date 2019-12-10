@@ -1,5 +1,15 @@
 a:hover {
     text-decoration: none;
+	color: #1db954;
+}
+
+body {
+	background-color: #000000;
+}
+
+* a {
+	color: #d4d4d4;
+
 }
 
 
@@ -58,7 +68,7 @@ img,
 
 .new-list-item .title {
 	display: block;
-	color: #444;
+	color: #e7e7e7;
 	font-size: 18px;
 	font-weight: bold;
     margin-bottom: 20px;
@@ -159,6 +169,7 @@ img,
 	padding: 50px 0;
 	text-align: center;
 	color: #999;
+
 }
 
 
@@ -167,13 +178,13 @@ img,
 }
 
 .btn-primary{
-	background-color: #ea0c3c;
-	border-color: #ea0c3c;
+	background-color: #fff;
+	border-color: #fff;
 }
 
 .btn-primary:hover{
-	background-color: #c7143b;
-	border-color: #ea0c3c;
+	background-color: #1db954;
+	border-color: #1db954;
 }
 
 /*.user_info_list{

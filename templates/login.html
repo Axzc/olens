@@ -33,14 +33,14 @@
         <small>没有账号？<a href="{% url 'signup' %}">注册</a></small>
     </h1>
 
-    {% if next %}
-        {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
-            please login with an account that has access.</p>
-        {% else %}
-            <p>Please login to see this page.</p>
-        {% endif %}
-    {% endif %}
+<!--    {% if next %}-->
+<!--        {% if user.is_authenticated %}-->
+<!--            <p>Your account doesn't have access to this page. To proceed,-->
+<!--            please login with an account that has access.</p>-->
+<!--        {% else %}-->
+<!--            <p>Please login to see this page.</p>-->
+<!--        {% endif %}-->
+<!--    {% endif %}-->
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <div class="form-group">
@@ -56,6 +56,7 @@
             {{ form.password }}
             <!--<input type="password" class="form-control">-->
         </div>
+        <div style="padding-bottom: 10px"><small>忘记密码?<a>找回</a></small></div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">登录</button>
         </div>
