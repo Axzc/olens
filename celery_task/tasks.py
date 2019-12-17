@@ -14,10 +14,12 @@ app = Celery('celery_task.tasks', broker='redis://:123456@localhost:6379/7')
 
 @app.task
 def send_signup_active_mail(toemail, username, token):
-    '''
-    发送注册激活邮件
+    """
+    :param toemail: 要发送的邮箱
+    :param username:  收件人的用户名
+    :param token:  加密后的userid
     :return:
-    '''
+    """
 
     subject = 'welcome messgae'
     message = ''
@@ -31,6 +33,26 @@ def send_signup_active_mail(toemail, username, token):
     print('-----------------------')
     print(subject, message, sender, receiver)
     print('-----------------------')
+
+    send_mail(subject, message, sender, receiver, html_message=htmlmessage)
+
+
+@app.task
+def send_forget_password_mail(toemail, username, token):
+    """
+    :param toemail: 要发送的邮箱
+    :param username:  收件人的用户名
+    :param token:  加密后的userid
+    :return:
+    """
+
+    subject = "找回密码"
+    message = "test"
+    sender = settings.DEFAULT_FROM_EMAIL
+    receiver = [toemail]
+    htmlmessage = '<h1>{}您的账户正在找回密码,请点击下里面链接找回.(如非本人操作请及时修改密码)'\
+                  '<h2><br /><a href="http://127.0.0.1:8000/user/resetpwd/{}"></h2>'\
+                  'http://127.0.0.1:8000/user/resetpwd/{}'.format(username, token, token)
 
     send_mail(subject, message, sender, receiver, html_message=htmlmessage)
 

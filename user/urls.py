@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
-from user.views import Singup, Login, UserCenter
+from user.views import Singup, Login, UserCenter, ForgetPwdView, RestPasswordView
 from user import views
 
 urlpatterns = [
@@ -17,6 +17,8 @@ urlpatterns = [
     path('password-change-done', TemplateView.as_view(
         template_name='password_change_done.html'),
          name='pwdcd'),
+    path('forgetpwd', ForgetPwdView.as_view(), name='forgetpwd'),
+    re_path('resetpwd/(?P<token>.*)', RestPasswordView.as_view(), name="rsetpwd")
     # path('accounts/', include('django.contrib.auth.urls'))
 ]
 

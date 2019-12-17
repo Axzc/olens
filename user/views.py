@@ -9,9 +9,9 @@ from django.db.models import Q
 
 
 from olens import settings
-from .forms import RegisterForm, LoginForm, MyChangePasswordFrom
+from .forms import RegisterForm, LoginForm, MyChangePasswordFrom, ForgetPasswordFrom, ResetPasswordFrom
 from .models import User
-from celery_task.tasks import send_signup_active_mail
+from celery_task.tasks import send_signup_active_mail, send_forget_password_mail
 
 
 # https://segmentfault.com/a/1190000009455783?utm_source=tag-newest
@@ -84,7 +84,7 @@ class UserCenter(ListView):
     template_name = 'homepage.html'
     context_object_name = 'users'
 
-
+@login_required()
 def change_password(request):
 
     '''修改密码 '''
@@ -131,8 +131,10 @@ def active(request, token):
 
         except SignatureExpired as e:
             # 激活链接过期
-            user = User.objects.get(id=user_id)
-            user.delete()
+            # username = token_confirm.remove_validate_token(token)
+
+            # user = User.objects.get(id=user_id)
+            request.user.delete()
             return HttpResponse('链接已过期')
 
 
@@ -152,6 +154,60 @@ def signout(request):
 #     print(raw_pwd)
 
 
+class ForgetPwdView(View):
+    """忘记密码"""
+
+    def get(self, request):
+
+        form = ForgetPasswordFrom()
+        return render(request, 'forget_pwd.html', {'form': form})
+
+    def post(self, request):
+        form = ForgetPasswordFrom(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = User.objects.get(email=email)
+            tjwss = TJWSS(settings.SECRET_KEY, 900)
+            info = {'confirm': user.id}
+            token = tjwss.dumps(info).decode()
+            send_forget_password_mail.delay(email, user.username, token)
+
+            return HttpResponse("发送成功")
+        else:
+            return render(request, 'forget_pwd.html', {'form': form})
+
+
+class RestPasswordView(View):
+    """重置密码"""
+
+    def get(self, request, token):
+        form = RestPasswordView()
+        tjwss = TJWSS(settings.SECRET_KEY, 900)
+        try:
+            # 获取解密信息
+            info = tjwss.loads(token)
+            user_id = info['confirm']
+            user = User.objects.get(id=user_id)
+            print(request.user, "############")
+            request.user = user
+            print(request.user, "&&&&&&&&&&&&&")
+
+            return render(request, 'reset_pwd', {'form': form})
+        except SignatureExpired as e:
+            return HttpResponse('链接已过期')
+
+    def post(self, request):
+
+        form = ResetPasswordFrom(request.POST)
+        if form.is_valid():
+            password = form.cleaned_data['new_password1']
+            request.user.set_password(password)
+            print(request.user, "************")
+            return redirect(reverse('login'))
+        else:
+            return render(request, 'reset_pwd', {'form': form})
+
+
 class CustomBackend(ModelBackend):
     """邮箱登录"""
 
@@ -162,6 +218,9 @@ class CustomBackend(ModelBackend):
                 return user
         except Exception as e:
             return None
+
+
+
 
 
 
