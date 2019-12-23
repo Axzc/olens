@@ -177,32 +177,34 @@ class ForgetPwdView(View):
             return render(request, 'forget_pwd.html', {'form': form})
 
 
+# FIXME
 class RestPasswordView(View):
     """重置密码"""
 
     def get(self, request, token):
-        form = RestPasswordView()
+        form = ResetPasswordFrom()
         tjwss = TJWSS(settings.SECRET_KEY, 900)
+        print(token)
         try:
             # 获取解密信息
             info = tjwss.loads(token)
             user_id = info['confirm']
             user = User.objects.get(id=user_id)
-            print(request.user, "############")
             request.user = user
-            print(request.user, "&&&&&&&&&&&&&")
+            print(request.user, "&&&&&&&&&&&&&&&&&&&&&&get")
+            return render(request, 'reset_pwd.html', {'form': form})
 
-            return render(request, 'reset_pwd', {'form': form})
         except SignatureExpired as e:
             return HttpResponse('链接已过期')
 
-    def post(self, request):
+    def post(self, request, token):
 
         form = ResetPasswordFrom(request.POST)
+        print(request.user)
         if form.is_valid():
-            password = form.cleaned_data['new_password1']
-            request.user.set_password(password)
+            password = form.cleaned_data['rest_new_password1']
             print(request.user, "************")
+            request.user.set_password(password)
             return redirect(reverse('login'))
         else:
             return render(request, 'reset_pwd', {'form': form})

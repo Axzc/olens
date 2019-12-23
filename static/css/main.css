@@ -178,13 +178,13 @@ img,
 }
 
 .btn-primary{
-	background-color: #fff;
-	border-color: #fff;
+	background-color: #1db954;
+	border-color: #1db954;
 }
 
 .btn-primary:hover{
-	background-color: #1db954;
-	border-color: #1db954;
+	background-color: #1ed760;
+	border-color: #1ed760;
 }
 
 /*.user_info_list{

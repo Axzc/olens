@@ -136,7 +136,7 @@ class MyChangePasswordFrom(forms.Form):
 class ForgetPasswordFrom(forms.Form):
 
     email = forms.EmailField(
-        widget=widgets.EmailInput(attrs={'class':' form-control loon lpass',
+        widget=widgets.EmailInput(attrs={'class': ' form-control loon lpass',
                                          'placeholder': '邮箱'})
     )
 
@@ -152,26 +152,27 @@ class ForgetPasswordFrom(forms.Form):
 
 class ResetPasswordFrom(forms.Form):
 
-    new_password1 = forms.CharField(max_length=32,
-                                    min_length=6,
-                                    required=True,
-                                    error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
-                                    widget=widgets.PasswordInput(attrs={'class': 'form-control loon lpass',
-                                                                        'placeholder': '新密码'}))
+    rest_new_password1 = forms.CharField(max_length=32,
+                                         min_length=6,
+                                         required=True,
+                                         error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
+                                         widget=widgets.PasswordInput(attrs={'class': 'form-control loon lpass',
+                                                                             'placeholder': '新密码'}))
 
-    new_password2 = forms.CharField(max_length=32,
-                                    min_length=6,
-                                    required=True,
-                                    error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
-                                    widget=widgets.PasswordInput(attrs={'class': 'form-control loon lpass',
-                                                                        'placeholder': '确认密码,请在输入一次'}))
+    rest_new_password2 = forms.CharField(max_length=32,
+                                         min_length=6,
+                                         required=True,
+                                         error_messages={'required': '密码不能为空', 'invalid': '格式不对'},
+                                         widget=widgets.PasswordInput(attrs={'class': 'form-control loon lpass',
+                                                                             'placeholder': '确认密码,请在输入一次'}))
 
     def clean(self):
-        password1 = self.cleaned_data.get('new_password1')
-        password2 = self.cleaned_data.get('new_password2')
+        password1 = self.cleaned_data['rest_new_password1']
+        password2 = self.cleaned_data['rest_new_password2']
 
         if password1 != password2:
             raise forms.ValidationError("两次密码输入的不一致")
+        return self.cleaned_data
 
 
 

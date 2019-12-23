@@ -29,8 +29,8 @@
     </div>
 </div>
 <div class="container container-small">
-    <h1>登录
-        <small>没有账号？<a href="{% url 'signup' %}">注册</a></small>
+    <h1>修改密码
+<!--        <small>想起来了？<a href="{% url 'signup' %}">登录</a></small>-->
     </h1>
 
 <!--    {% if next %}-->
@@ -41,24 +41,21 @@
 <!--            <p>Please login to see this page.</p>-->
 <!--        {% endif %}-->
 <!--    {% endif %}-->
-    <form action="{% url 'login' %}" method="post">
+    <form action="{% url 'lgoin' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
-            {{ form.username.error }}
-            <label for="form.username.id_for_label">用户名/邮箱</label>
-            {{ form.username }}
-
-            <!--<input type="text" class="form-control">-->
+            {{ form.rest_new_password1.errors }}
+            <label for="{{ form.rest_new_password1.id_for_label }}">密码</label>
+            {{ form.rest_new_password1 }}
         </div>
         <div class="form-group">
-            {{ form.password.error }}
-            <label for="form.password.id_for_label">密码</label>
-            {{ form.password }}
-            <!--<input type="password" class="form-control">-->
+            {{ form.rest_new_password2.errors }}
+            <label for="{{ form.rest_new_password2.id_for_label }}">确认密码</label>
+            {{ form.rest_new_password2 }}
         </div>
-        <div style="padding-bottom: 10px"><small><a href="{% url 'forgetpwd' %}">忘记密码?</a></small></div>
+        <div style="padding-bottom: 20px"><small>想起来了?<a href="{% url 'login' %}">登录</a></small></div>
         <div class="form-group">
-            <button class="btn btn-primary btn-block" type="submit">登录</button>
+            <button class="btn btn-primary btn-block" type="submit">修改</button>
         </div>
 
         <span style="color: red">
